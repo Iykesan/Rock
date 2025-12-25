@@ -7,59 +7,107 @@ function getComputerChoice(){
     }else return "paper"
 }
 
-function getHumanChoice(){
-    let hand = prompt("Pick between rock, paper, or scissors: ")
-    let newHand = hand.toLowerCase()
-    return newHand
-} 
+const choices = document.querySelector("#Choices")
+const rock = document.querySelector("#Rock")
+const paper = document.querySelector("#Paper")
+const scissors = document.querySelector("#Scissors")
+
+rock.addEventListener('click', (event)=> {
+    let humanChoice = event.target.value
+    playRound(humanChoice)
+})
+paper.addEventListener('click', (event)=> {
+    let humanChoice = event.target.value
+    playRound(humanChoice)
+})
+scissors.addEventListener('click', (event)=> {
+    let humanChoice = event.target.value
+    playRound(humanChoice)
+})
+
+const result = document.querySelector("#results")
+const score = document.querySelector("#scores")
+const computer = document.querySelector("#Computer")
+const human = document.querySelector("#Human")
 
 let humanScore = 0
+let humScore = document.createElement("span")
+humScore.textContent = `${humanScore}`
+human.appendChild(humScore)
+
 let computerScore = 0   
+let compScore = document.createElement("span")
+compScore.textContent = `${computerScore}`
+computer.appendChild(compScore)
 
-function playRound(){
-    let computerSelection = getComputerChoice()   
-    let humanSelection = getHumanChoice()
+function playRound(humanSelection){
+    let computerSelection = getComputerChoice()  
 
-    console.log("computer choice:", computerSelection);
-    console.log("hunan choice:", humanSelection);
+    const winner = document.createElement("p")
+    const comp = document.createElement("p")
+    comp.textContent = `Computer choice: ${computerSelection}`
+    result.appendChild(comp)
+    const hum = document.createElement("p")
+    hum.textContent = `Player choice: ${humanSelection}`
+    result.appendChild(hum)
 
     if(humanSelection === computerSelection){
-        console.log("no one wins!")
+        const winner = document.createElement("p")
+        winner.textContent = `no one wins!`
+        result.appendChild(winner)
     }else if(computerSelection === "rock" && humanSelection === "scissors"){
-        console.log("rock beats scissors! Computer wins")
+        const winner = document.createElement("p")
+        winner.textContent = `Rock beats Scissors! Computer Wins!`
+        result.appendChild(winner)
         computerScore++
     }else if(computerSelection === "rock" && humanSelection === "paper"){
-        console.log("paper beats rock! Player wins")
+        const winner = document.createElement("p")
+        winner.textContent = `paper beats rock! Player wins`
+        result.appendChild(winner)
         humanScore++
     }else if(computerSelection === "scissors" && humanSelection === "rock"){
-        console.log("rock beats scissors! Player wins")
+        const winner = document.createElement("p")
+        winner.textContent = `rock beats scissors! Player wins`
+        result.appendChild(winner)
         humanScore++
     }else if(computerSelection === "scissors" && humanSelection === "paper"){
-        console.log("scissors beats paper! Computer wins")
+        const winner = document.createElement("p")
+        winner.textContent = `cissors beats paper! Computer wins`
+        result.appendChild(winner)
         computerScore++
     }else if(computerSelection === "paper" && humanSelection === "rock"){
-        console.log("paper beats rock! Computer wins")
+        const winner = document.createElement("p")
+        winner.textContent = "paper beats rock! Computer wins"
+        result.appendChild(winner)
         computerScore++
     }else{
-        console.log("scissors beats paper! Player wins")
+        const winner = document.createElement("p")
+        winner.textContent = `scissors beats paper! Player wins`
+        result.appendChild(winner)
         humanScore++
     }
-}
 
-
-function playGame(){
-
-    for (i = 0; i < 5; i++){
-        playRound()
-    }    
-
-    if(humanScore < computerScore){
-        return "Winner: Computer"
-    }else if(humanScore > computerScore){
-        return "Winner: Humanr"
-    }else{
-        return "Draw"
+    if(computerScore === 5){
+        const win = document.createElement("p")
+        win.textContent = `Winner: COMPUTER `
+        score.appendChild(win)
+    }else if(humanScore === 5 ){
+        const win = document.createElement("p")
+        win.textContent = `Winner: HUMAN`
+        score.appendChild(win)
     }
+    console.log(computerScore)
+    console.log(humanScore)
+
+    human.removeChild(humScore)
+    humScore.textContent = `${humanScore}`
+    human.appendChild(humScore)
+    computer.removeChild(compScore)
+    compScore.textContent = `${computerScore}`
+    computer.appendChild(compScore)
+
 }
 
-console.log(playGame())
+
+
+//console.log(playGame())
