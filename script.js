@@ -11,13 +11,13 @@ function getHumanChoice(){
     let hand = prompt("Pick between rock, paper, or scissors: ")
     let newHand = hand.toLowerCase()
     return newHand
-}
+} 
 
 let humanScore = 0
 let computerScore = 0   
 
 function playRound(){
-    let computerSelection = getComputerChoice()
+    let computerSelection = getComputerChoice()   
     let humanSelection = getHumanChoice()
 
     console.log("computer choice:", computerSelection);
